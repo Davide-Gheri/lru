@@ -1,5 +1,5 @@
 {
-  "name": "lru",
+  "name": "@davidegheri/lru",
   "version": "0.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,10 @@
     "build": "rimraf dist && yarn build:tsc && rollup -c rollup.config.js",
     "test": "jest",
     "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
-    "lint": "tslint -p tsconfig.json -c tslint.json"
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "preversion": "yarn lint && yarn test",
+    "version": "yarn build",
+    "postversion": "git push --follow-tags"
   },
   "devDependencies": {
     "@types/jest": "^24.0.13",
