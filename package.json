@@ -1,6 +1,6 @@
 {
   "name": "lru",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
@@ -8,10 +8,12 @@
     "build:tsc": "tsc --emitDeclarationOnly",
     "build": "rimraf dist && yarn build:tsc && rollup -c rollup.config.js",
     "test": "jest",
+    "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "lint": "tslint -p tsconfig.json -c tslint.json"
   },
   "devDependencies": {
     "@types/jest": "^24.0.13",
+    "coveralls": "^3.0.3",
     "husky": "^2.3.0",
     "jest": "^24.8.0",
     "rimraf": "^2.6.3",
