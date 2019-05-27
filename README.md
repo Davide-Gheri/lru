@@ -1,6 +1,8 @@
 # @davidegheri/lru
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Davide-Gheri/lru.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.com/Davide-Gheri/lru.svg?branch=master)](https://travis-ci.com/Davide-Gheri/lru)
+[![Coverage Status](https://coveralls.io/repos/github/Davide-Gheri/lru/badge.svg?branch=master)](https://coveralls.io/github/Davide-Gheri/lru?branch=master)
 
 Tiny Javascript Least Recently Used cache, for both Browsers and NodeJs.
 No dependencies needed.
