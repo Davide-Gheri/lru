@@ -1,5 +1,6 @@
-
 # @davidegheri/lru
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/Davide-Gheri/lru.svg)](https://greenkeeper.io/)
 
 Tiny Javascript Least Recently Used cache, for both Browsers and NodeJs.
 No dependencies needed.
