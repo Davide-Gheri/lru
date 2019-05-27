@@ -8,7 +8,7 @@
     "build:tsc": "tsc --emitDeclarationOnly",
     "build": "rimraf dist && yarn build:tsc && rollup -c rollup.config.js",
     "test": "jest",
-    "test:coveralls": "jest --coberage --coverageReporters=text-lcov | coveralls",
+    "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "lint": "tslint -p tsconfig.json -c tslint.json"
   },
   "devDependencies": {
