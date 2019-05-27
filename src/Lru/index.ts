@@ -22,6 +22,15 @@ export class Lru {
     return this.values.size;
   }
 
+  reset(limit?: number) {
+    this.values.clear();
+    this.headKey = undefined;
+    this.tailKey = undefined;
+    if (limit) {
+      this.limit = limit;
+    }
+  }
+
   has(key: Key): boolean {
     return this.values.has(key);
   }

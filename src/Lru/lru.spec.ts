@@ -205,3 +205,37 @@ describe('Lru ensure max length', () => {
     expect(lru.get('key1')).toBeUndefined();
   });
 });
+
+describe('Lru reset', () => {
+  let lru: Lru;
+
+  beforeEach(() => {
+    lru = new Lru(3);
+  });
+
+  it('should reset', () => {
+    lru.set('key1', 1);
+    lru.set('key2', 2);
+    lru.set('key3', 3);
+
+    expect(lru.size).toEqual(3);
+    expect(lru.headKey).toEqual('key3');
+    expect(lru.tailKey).toEqual('key1');
+    lru.reset();
+    expect(lru.size).toEqual(0);
+    expect(lru.headKey).toBeUndefined();
+    expect(lru.tailKey).toBeUndefined();
+
+    expect(lru['limit']).toEqual(3);
+  });
+
+  it('should reset with new limit', () => {
+    lru.set('key1', 1);
+    lru.set('key2', 2);
+    lru.set('key3', 3);
+    expect(lru.size).toEqual(3);
+    lru.reset(2);
+    expect(lru.size).toEqual(0);
+    expect(lru['limit']).toEqual(2);
+  });
+});
