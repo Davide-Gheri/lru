@@ -22,13 +22,14 @@ export class Lru {
     return this.values.size;
   }
 
-  reset(limit?: number) {
+  reset(limit?: number): this {
     this.values.clear();
     this.headKey = undefined;
     this.tailKey = undefined;
     if (limit) {
       this.limit = limit;
     }
+    return this;
   }
 
   has(key: Key): boolean {
