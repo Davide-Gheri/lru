@@ -2,12 +2,13 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "sourceMap": true,
-    "declaration": true,
+    "sourceMap": false,
+    "declaration": false,
     "strict": true,
     "esModuleInterop": true,
     "lib": ["es2015"],
-    "outDir": "./dist"
+    "outDir": "./dist/cjs",
+    "moduleResolution": "node"
   },
   "include": ["src"],
   "exclude": [

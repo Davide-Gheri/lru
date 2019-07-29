@@ -1,12 +1,17 @@
 {
   "name": "@davidegheri/lru",
   "version": "0.1.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "types": "dist/types/index.d.ts",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
   "license": "MIT",
   "scripts": {
-    "build:tsc": "tsc --emitDeclarationOnly",
-    "build": "rimraf dist && yarn build:tsc && rollup -c rollup.config.js",
+    "build:cjs": "tsc -p tsconfig.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build": "rimraf dist && yarn build:cjs && yarn build:esm && rollup -c rollup.config.js",
     "test": "jest",
     "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "lint": "tslint -p tsconfig.json -c tslint.json",
@@ -24,8 +29,6 @@
     "rollup-plugin-typescript": "^1.0.1",
     "rollup-plugin-uglify": "^6.0.2",
     "ts-jest": "^24.0.2",
-    "benchmark": "^2.1.4",
-    "rollup-plugin-copy": "^3.0.0",
     "tslint": "^5.16.0",
     "typescript": "^3.4.5"
   },
