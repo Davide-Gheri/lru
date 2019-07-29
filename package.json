@@ -7,6 +7,11 @@
   "files": [
     "dist"
   ],
+  "author": "Davide Gheri <davide@davidegheri.com>",
+  "bugs": {
+    "url": "https://github.com/Davide-Gheri/lru/issues"
+  },
+  "homepage": "https://github.com/Davide-Gheri/gm-palette#readme",
   "license": "MIT",
   "scripts": {
     "build:cjs": "tsc -p tsconfig.json",
