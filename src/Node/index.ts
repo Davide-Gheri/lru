@@ -1,11 +1,9 @@
 
-export type Key = any;
-
-export class Node {
+export class Node<K = any, V = any> {
   constructor(
-    public key: Key,
-    public value: any,
-    public next?: Key,
-    public prev?: Key,
+    public key: K,
+    public value: V,
+    public next?: K,
+    public prev?: K,
   ) {}
 }

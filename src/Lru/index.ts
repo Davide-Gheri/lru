@@ -1,21 +1,21 @@
-import { Node, Key } from '../Node';
+import { Node } from '../Node';
 
-export class Lru {
-  values = new Map<Key, Node>();
+export class Lru<K = any, V = any> {
+  values = new Map<K, Node<K, V>>();
 
-  public headKey!: Key;
-  public tailKey!: Key;
+  public headKey?: K;
+  public tailKey?: K;
 
   constructor(
     private limit = 10,
   ) {}
 
-  get head(): any {
-    return this.get(this.headKey);
+  get head(): V | undefined {
+    return this.headKey ? this.get(this.headKey) : undefined;
   }
 
-  get tail(): any {
-    return this.get(this.tailKey);
+  get tail(): V | undefined {
+    return this.tailKey ? this.get(this.tailKey) : undefined;
   }
 
   get size(): number {
@@ -32,16 +32,16 @@ export class Lru {
     return this;
   }
 
-  has(key: Key): boolean {
+  has(key: K): boolean {
     return this.values.has(key);
   }
 
-  set(key: Key, value: any): this {
+  set(key: K, value: V): this {
     if (this.has(key)) {
-      const item = this.values.get(key) as Node;
+      const item = this.values.get(key) as Node<K, V>;
       item.value = value;
       if (this.headKey !== key) {
-        const oldHead = this.values.get(this.headKey);
+        const oldHead = this.headKey && this.values.get(this.headKey);
 
         if (oldHead) {
           oldHead.next = key;
@@ -58,7 +58,7 @@ export class Lru {
       if (this.limit > 0 && this.limit === this.size) {
         this.removeLast();
       }
-      const oldHead = this.values.get(this.headKey);
+      const oldHead = this.headKey && this.values.get(this.headKey);
       if (oldHead) {
         oldHead.next = key;
       }
@@ -72,9 +72,9 @@ export class Lru {
     return this;
   }
 
-  get(key: Key): any {
+  get(key: K): V | undefined {
     if (this.has(key)) {
-      const item = this.values.get(key) as Node;
+      const item = this.values.get(key) as Node<K, V>;
       this.set(key, item.value);
 
       return item.value;
@@ -82,9 +82,9 @@ export class Lru {
     return undefined;
   }
 
-  delete(key: Key): this {
+  delete(key: K): this {
     if (this.has(key)) {
-      const item = this.values.get(key) as Node;
+      const item = this.values.get(key) as Node<K, V>;
       this.values.delete(key);
 
       this.updateItemNextPrev(item);
@@ -96,7 +96,7 @@ export class Lru {
     return this;
   }
 
-  private updateItemNextPrev(item: Node) {
+  private updateItemNextPrev(item: Node): void {
     const oldNext = this.values.get(item.next);
     const oldPrev = this.values.get(item.prev);
     if (this.tailKey === item.key) {
@@ -111,14 +111,16 @@ export class Lru {
   }
 
   private removeLast(): this {
-    const item = this.values.get(this.tailKey) as Node;
-    this.values.delete(this.tailKey);
-
-    const oldNext = this.values.get(item.next);
-
-    if (oldNext) {
-      this.tailKey = item.next;
-      oldNext.prev = undefined;
+    if (this.tailKey) {
+      const item = this.values.get(this.tailKey) as Node<K, V>;
+      this.values.delete(this.tailKey);
+  
+      const oldNext = item.next && this.values.get(item.next) as Node<K, V>;
+  
+      if (oldNext) {
+        this.tailKey = item.next;
+        oldNext.prev = undefined;
+      }
     }
     return this;
   }
